@@ -37,7 +37,7 @@ LIBRERIES_APPS = [
 ]
 
 PROJECT_APPS = [
-    # 'apps....'
+    'apps.card_api'
 ]
 
 
