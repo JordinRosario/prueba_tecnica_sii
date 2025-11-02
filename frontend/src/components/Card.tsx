@@ -8,27 +8,26 @@ type CardProps = {
 };
 
 const Card: React.FC<CardProps> = ({ size = "small", CardFormValues }) => {
-  console.log(CardFormValues)
   const number_card = CardFormValues.number_card;
 
   const formatnumber_card = (num: string) => {
-    return num.replace(/\s+/g, "").replace(/(\d{4})(?=\d)/g, "$1 ");
+    return num.replace(/\s+/g, "").replace(/([\d*]{4})(?=[\d*])/g, "$1 ");
   };
   const formattedNumber = CardFormValues.number_card && CardFormValues.number_card.trim() !== "" ? formatnumber_card(number_card) : "4242 4242 4242 4242";
 
   return (
-      <div className="credit-card relative select-none pointer-events-none">
+      <div className="credit-card relative select-none pointer-e">
 
         {
           size === 'large'
           ?
-              <div className={`verso z-1 absolute overflow-hidden transform translate-y-12 left-16 w-[22rem] h-56 rounded-2xl bg-[#00062b] shadow-2xl`}>
+              <div className={`verso -z-10 absolute overflow-hidden transform translate-y-12 left-16 w-[22rem] h-56 rounded-2xl bg-[#00062b] shadow-2xl`}>
                   <div className="w-full h-12 bg-gray-800 absolute top-10">&nbsp;</div>
               </div>
           :''
         }
 
-        <div className={`recto z-2 absolute overflow-hidden min-w-90 h-56 rounded-2xl px-8 py-6 bg-[#000939] text-white shadow-xl flex flex-col justify-end gap-6`}>
+        <div className={`recto w-[360px] overflow-hidden h-56 rounded-2xl px-8 py-6 bg-[#000939] text-white shadow-xl flex flex-col justify-end gap-6`}>
           
           <div className="logo absolute top-7 left-64 flex justify-end items-end">
             <svg

@@ -11,6 +11,6 @@ class CardAdmin(admin.ModelAdmin):
     def masked_number_card(self, obj):
         if obj.number_card and len(obj.number_card) >= 4:
             return f"{obj.number_card[:6]}******{obj.number_card[-4:]}"
-        return obj.number_card or "N/A"
+        return obj.number_card
 
     masked_number_card.short_description = "Card Number"

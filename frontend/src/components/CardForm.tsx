@@ -5,7 +5,11 @@ import AlertSuccess from "./AlertSuccess";
 import { useState } from "react";
 import { api } from "../api/api";
 
-const CardForm = () => {
+type CardFormProps = {
+  onCardAdded: () => void;
+};
+
+const CardForm = ({ onCardAdded }: CardFormProps) => {
   const {
     register,
     handleSubmit,
@@ -21,6 +25,7 @@ const CardForm = () => {
       const response = await api.post('/api/card/', data)
       const status201:boolean = response.status == 201 ? true : false
       setShowMessage(status201);
+      onCardAdded()
       
       setTimeout(() => {
         setShowMessage(false);
@@ -50,10 +55,10 @@ const CardForm = () => {
   return (
     <>
       { showMessage && <AlertSuccess key={Date.now()} message="La tarjeta fue agregada correctamente."/> }
-      <div className="ms-5">
+      <div className="absolute me-16">
         <Card size='large' CardFormValues={CardFormValues}/>
       </div>
-      <div className="mt-72 min-w-[500px]">
+      <div className="mt-75 min-w-[500px]">
         <form
         onSubmit={handleSubmit(onSubmit)}
         className="max-w-2xl mx-auto bg-[#00083c] p-6 rounded-2xl shadow-md"
@@ -118,7 +123,7 @@ const CardForm = () => {
           </div>
 
           <div>
-            <label className="block mb-1 font-medium text-gray-400">
+            {/* <label className="block mb-1 font-medium text-gray-400">
               Fecha Vencimiento
             </label>
             <input
@@ -136,7 +141,45 @@ const CardForm = () => {
                   ? "border-red-500 focus:ring-red-400"
                   : "border-gray-300 focus:ring-indigo-400"
               }`}
-            />
+            /> */}
+              <label className="block mb-1 font-medium text-gray-400">
+                Fecha Vencimiento
+              </label>
+              <input
+                type="text"
+                maxLength={5}
+                placeholder="MM/AA"
+                {...register("expiration_date", {
+                  required: "La fecha es obligatoria",
+                  pattern: {
+                    value: /^(0[1-9]|1[0-2])\/\d{2}$/,
+                    message: "Formato válido: MM/AA",
+                  },
+                  validate: (value) => {
+                    const [month, year] = value.split("/").map(Number);
+                    const currentYear = new Date().getFullYear() % 100; 
+                    const maxYear = currentYear + 5;
+
+                    if (isNaN(month) || isNaN(year)) return "Formato inválido";
+                    if (month < 1 || month > 12) return "El mes debe ser entre 01 y 12";
+                    if (year < 22 || year > maxYear)
+                      return `El año debe estar entre 22 y ${maxYear}`;
+                    return true;
+                  },
+                })}
+                onChange={(e) => {
+                  let value = e.target.value.replace(/\D/g, "");
+                  if (value.length >= 3) {
+                    value = value.slice(0, 2) + "/" + value.slice(2, 4);
+                  }
+                  e.target.value = value.slice(0, 5);
+                }}
+                className={`w-full outline-none text-white bg-[#000c5a] rounded-lg p-2 ${
+                  errors.expiration_date
+                    ? "border-red-500 focus:ring-red-400"
+                    : "border-gray-300 focus:ring-indigo-400"
+                }`}
+              />
             {errors.expiration_date && (
               <p className="text-red-500 text-sm mt-1">
               {errors.expiration_date.message}
