@@ -41,13 +41,13 @@ pip install -r requirements.txt
 ```
 
 
-5. Ejecuta migraciones y carga datos iniciales (si aplica):
+4. Ejecuta migraciones y carga datos iniciales (si aplica):
 
 ```bash
     python manage.py migrate
 ```
 
-6. Realizar el build del frontend:
+5. Realizar el build del frontend:
 
 ```bash
     cd frontend/
@@ -56,7 +56,13 @@ pip install -r requirements.txt
     npm run dev # en caso de que quiera alzar el servidor de frontend (http://localhost:5173/static/)
 ```
 
-6. Inicia el servidor:
+6. Compilar archivos estaticos:
+
+```bash
+    python manage.py collectstatic
+```
+
+7. Inicia el servidor:
 
 ```bash
     python manage.py runserver
