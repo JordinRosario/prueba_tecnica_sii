@@ -15,7 +15,7 @@ class Card(models.Model):
             )
         ],
     )
-    cardholder_name = models.CharField(max_length=50)
+    cardholder_name = models.CharField(max_length=20)
     expiration_date = models.CharField(max_length=5)
     cvv = models.CharField(
         max_length=3,
