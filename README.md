@@ -2,7 +2,13 @@
 > Los archivos `.env` fueron incluidos intencionalmente en este repositorio con el propósito de **facilitar la ejecución y prueba técnica de la aplicación**.  
 > En un entorno de producción, estos archivos **no deberían subirse** por motivos de seguridad.
 
-> En algunos puntos use IA **Para el diseño de la targeta, el input Fecha de vencimiento y RegEx.** 
+> En algunos puntos use IA **Para el diseño de la targeta, el input Fecha de vencimiento y RegEx.**
+
+> Pantalla inicial
+<img width="1920" height="876" alt="image" src="https://github.com/user-attachments/assets/5e0eadf1-e9a8-4d4b-a60d-a8e81864d34f" />
+
+> Listado de targetas
+<img width="1920" height="870" alt="image" src="https://github.com/user-attachments/assets/279add65-896e-4209-b8a9-6f70cded72e7" />
 
 
 ## Prueba tecnica
